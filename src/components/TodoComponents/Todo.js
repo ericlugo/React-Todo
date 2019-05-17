@@ -4,7 +4,11 @@ import React from 'react';
 import './Todo.css';
 
 const Todo = (props) => {
-  return <p>{props.task}</p>;
+  return (
+    <p data-id={props.id} onClick={props.toggleHandler}>
+      {props.task}
+    </p>
+  );
 };
 
 export default Todo;

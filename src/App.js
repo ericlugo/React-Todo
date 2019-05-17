@@ -35,7 +35,14 @@ class App extends React.Component {
     });
   };
 
-  submitTodoHandler = (event) => {
+  toggleHandler = (event) => {
+    event.preventDefault();
+    this.state.todoList.forEach((item) => {
+      if (item.id.toString() === event.target.dataset.id) item.completed = !item.completed;
+    });
+  };
+
+  submitHandler = (event) => {
     event.preventDefault();
     let tempTask = {
       task: this.state.newTask.task,
@@ -52,12 +59,24 @@ class App extends React.Component {
     });
   };
 
+  clearHandler = (event) => {
+    event.preventDefault();
+    this.setState({
+      todoList: this.state.todoList.filter((item) => !item.completed),
+    });
+  };
+
+  clearAllHandler = (event) => {
+    event.preventDefault();
+    this.setState(defaultState);
+  };
+
   render() {
     return (
       <div>
         <h1>ToDo List: MVP</h1>
-        <TodoList todoList={this.state.todoList} />
-        <TodoForm submitTodoHandler={this.submitTodoHandler} onChangeHandler={this.onChangeHandler} task={this.state.newTask.task} />
+        <TodoForm submitHandler={this.submitHandler} clearHandler={this.clearHandler} clearAllHandler={this.clearAllHandler} onChangeHandler={this.onChangeHandler} task={this.state.newTask.task} />
+        <TodoList todoList={this.state.todoList} toggleHandler={this.toggleHandler} />
       </div>
     );
   }

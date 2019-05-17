@@ -8,10 +8,11 @@ import './Todo.css';
 
 function TodoForm(props) {
   return (
-    <form name='TaskInputForm' onSubmit={props.submitTodoHandler}>
+    <form name='TaskInputForm'>
       <input type='text' value={props.task} placeholder='Please Enter New Task Here' name='newTask' onChange={props.onChangeHandler} />
-      <button onClick={props.submitTodoHandler}>Submit</button>
-      <button>Clear Completed</button>
+      <button onClick={props.submitHandler}>Submit</button>
+      <button onClick={props.clearHandler}>Clear Completed</button>
+      <button onClick={props.clearAllHandler}>Clear All</button>
     </form>
   );
 }
